@@ -1,0 +1,20 @@
+<%= provide(:title,"投稿編集ページ") %>
+<div class="upload_wrapper">
+<%= form_with model: @post, builder: CustomFormBuilder, local: true do |f| %>
+  <div class="field img_uploader">
+    <div id="prev_img_box" class="hidden">
+      <img id="prev_img" src="#" class='hidden' /> 
+    </div>
+    <% if @post.img? %>
+      <%= image_tag @post.img.to_s, class:'post_img' %>
+    <% else %>
+      <%= f.hidden_field :img_cache %>
+      <img class="present_img" src="https://kukuhana.s3-ap-northeast-1.amazonaws.com/no_img.jpg" />
+    <% end %> 
+    <%= f.file_field :img, id: 'post_img' %>
+    <p class="title"><%= f.label :title %></p>
+    <p><%= f.text_area :title %></p>
+    <%= f.submit 'POST' ,id: "submit_btn" %>
+  </div>
+<% end %>
+</div>

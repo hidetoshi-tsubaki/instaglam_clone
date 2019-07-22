@@ -1,0 +1,11 @@
+<% if current_user.already_bookmarked?(post) %>
+  <%= link_to remove_bookmark_path(post), class: "bookmark", remote: true do %>
+    <%= icon("fas", "bookmark") %>
+  <% end %>
+<% else %>
+  <%= link_to add_bookmark_path(post), class: "bookmark", remote: true do %>
+    <%= icon("far", "bookmark") %>
+  <% end %>
+<% end %>
+
+

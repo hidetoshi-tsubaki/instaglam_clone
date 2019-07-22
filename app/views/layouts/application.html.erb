@@ -1,14 +1,25 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Instaglam</title>
-    <%= csrf_meta_tags %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title><%= yield(:title) %></title>
+   <%= render 'layouts/head' %>
   </head>
-
+  <header>
+  <%= render 'layouts/header' %>
+  </header>
+  <%= render 'layouts/flash' %>
+  <section id="modalArea">
+    <%= render 'layouts/modal' %>
+  </section>
+  <section id="user_menu_area">
+    <%= render 'layouts/user_menu' if user_signed_in? %>
+  </section>
   <body>
-    <%= yield %>
-  </body>
+  <div class="wrapper">
+      <%= yield %>
+    </body>
+    <footer>
+      <%= render 'layouts/footer' %>
+    </footer>
+  </div>
 </html>

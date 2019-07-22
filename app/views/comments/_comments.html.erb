@@ -1,0 +1,7 @@
+<% comments.each do |comment| %>
+  <hr>
+  <li class="comment">
+    <p><%= link_to "#{comment.user.name}", user_path(comment.user) %><span class="commented_time"><%= time_ago_in_words(comment.created_at) %>前</span></p>
+    <p class="comment-area"><%= comment.content %><p>
+  </li>
+<% end %>
