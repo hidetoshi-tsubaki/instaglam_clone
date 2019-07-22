@@ -23,6 +23,4 @@ test:
 production:
   <<: *default
   adapter: postgresql
-  url: <%= ENV['DATABASE_URL'] %>
-  encoding: unicode
-  pool: 5
+  database: db/production.postgresql
