@@ -4,7 +4,7 @@ require 'carrierwave/storage/fog'
 
 CarrierWave.configure do |config|
   config.fog_provider = 'fog/aws'
-  config.fog_directory ='faketagram'
+  config.fog_directory = ENV['AWS_BUCKET_NAME']
   config.storage = :fog
   config.fog_credentials = {
     provider: 'AWS',
