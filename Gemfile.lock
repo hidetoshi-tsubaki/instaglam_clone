@@ -304,7 +304,7 @@ DEPENDENCIES
   mini_magick
   omniauth
   omniauth-facebook
-  pg (~> 0.20)
+  pg
   pry-byebug
   puma (= 3.9.1)
   rack-livereload
