@@ -13,10 +13,10 @@ class User < ApplicationRecord
   validates :name, { presence: true, length: {maximum: 40}}
   validates :username, { presence: true,uniqueness: true, length: {maximum: 40}}
   validates :introduction, length: {maximum: 256}
-  VALID_URL_REGEX = /\Ahttp(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/
-  validates :website ,{length: {maximum: 256 }, format: {with: VALID_URL_REGEX ,allow_blank: true }}
-  VALID_TEL_REGEX = /\A\d{10,11}\z/
-  validates :tel ,format: {with: VALID_TEL_REGEX, allow_blank: true }
+  # VALID_URL_REGEX = "/\Ahttp(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w-.\/?%&=]*)?/"
+  # validates :website ,{length: {maximum: 256 }, format: {with: VALID_URL_REGEX ,allow_blank: true }}
+  # VALID_TEL_REGEX = "/\A\d{10,11}\z/"
+  # validates :tel ,format: {with: VALID_TEL_REGEX, allow_blank: true }
   
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
