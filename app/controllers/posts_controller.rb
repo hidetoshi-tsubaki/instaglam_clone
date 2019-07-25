@@ -39,7 +39,9 @@ class PostsController < ApplicationController
   end
 
   def search
-    @posts = Post.search(params[:keyword])
+    @user = User.find_by(params[:page_user_id])
+    @current_user = current_user
+    @posts = Post.search(params[:keyword],params[:current_page],@user.id,@current_user)
     respond_to do |format|
       format.html {redirect_to feed_path(current_user)}
       format.js
@@ -50,4 +52,7 @@ class PostsController < ApplicationController
     def post_paramater
       params.require(:post).permit(:img, :title)
     end
+
+    
+
 end

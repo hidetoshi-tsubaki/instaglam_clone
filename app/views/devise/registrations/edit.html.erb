@@ -16,12 +16,12 @@
     </div>
     <div class="field">
       <p>: 名前</p>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
     </div>
 
     <div class="field">
       <p>: ユーザー名</p>
-      <%= f.text_field :username %>
+      <%= f.text_field :username, autocomplete: "username" %>
     </div>
 
     <div class="field">
@@ -49,12 +49,12 @@
 
     <div class="field">
       <p>: ウェブサイト</p>
-      <%= f.text_field :website %>
+      <%= f.text_field :website, autocomplete: "website" %>
     </div>
 
     <div class="field">
       <p>: 自己紹介文</p>
-      <%= f.text_area :introduction %>
+      <%= f.text_area :introduction, autocomplete: "introduction" %>
     </div>
 
     <hr>
@@ -62,12 +62,12 @@
 
     <div class="field">
       <p>: メールアドレス</p>
-      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.email_field :email, autocomplete: "email" %>
     </div>
 
     <div class="field">
       <p>: 電話番号  例）09012345678  ハイフンなし</p>
-      <%= f.telephone_field :tel %>
+      <%= f.telephone_field :tel, autocomplete: "tel" %>
     </div>
 
     <div class="field">

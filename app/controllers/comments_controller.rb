@@ -5,11 +5,9 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.new(comment_paramater)
     @post = Post.includes(comments: :user).find(comment_paramater[:post_id])
-    @comments = @post.comments.recent
-    p "######"
-    p @comments
+    @comments = @post.comments.includes(:user).recent
     if @comment.save
-      send_notification_by(current_user,"comment") unless current_user.id == comment_paramater[:post_id]
+      send_notification_by(current_user,"comment") unless current_user.id == @post.user_id
       respond_to do |format|
         format.html {redirect_to show_post_path(@post)}
         format.js {render'comments/comments'}

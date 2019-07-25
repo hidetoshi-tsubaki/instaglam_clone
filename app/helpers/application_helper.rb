@@ -9,4 +9,7 @@ module ApplicationHelper
     end
     return text
   end
+
+  def show_search_window?(controller)
+  end
 end

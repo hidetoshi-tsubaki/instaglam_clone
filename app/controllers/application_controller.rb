@@ -30,13 +30,19 @@ class ApplicationController < ActionController::Base
     case action
     when "comment"
       return if current_user.id == @post.id
+      # threads = []
+      # threads << Thread.new { comment_notification(action) }
+      # threads << Thread.fork { comment_notification_mailer(@post) }
+      # threads.each { |thr| thr.join }
       @notification = current_user.active_notifications.new(
         post_id: @post.id,
         comment_id: @comment.id,
         reciever_id: @post.user_id,
         action: action
       )
-      NotificationMailer.comment_notification_mail(current_user,@post.user,@post).deliver_now unless @post.user.email && @post.user.notification
+      t = Thread.new do
+        NotificationMailer.comment_notification_mail(current_user,@post.user,@post).deliver_now if @post.user.email.present? && @post.user.notification
+      end
     when "bookmark"
       return if current_user.id == @post.id
       @notification = current_user.active_notifications.new(
@@ -44,14 +50,18 @@ class ApplicationController < ActionController::Base
         reciever_id: @post.user_id,
         action: action
       )
-      NotificationMailer.bookmark_notification_mail(current_user,@post.user,@post).deliver_now unless @post.user.email && @post.user.notification
+      t = Thread.new do
+        NotificationMailer.bookmark_notification_mail(current_user,@post.user,@post).deliver_now if @post.user.email.present? && @post.user.notification
+       end
     when "follow"
       return if current_user.id == @user.id
       @notification = current_user.active_notifications.new(
         reciever_id: @user.id,
         action: action
       )
-      NotificationMailer.follow_notification_mail(current_user,@user).deliver_now  unless @user.email && @user.notification 
+      t = Thread.new do
+        NotificationMailer.follow_notification_mail(current_user,@user).deliver_now  if @user.email.present? && @user.notification 
+      end
     end
     @notification.save if @notification.valid?
   end
@@ -69,6 +79,19 @@ class ApplicationController < ActionController::Base
   def correct_user
     user = User.find(params[:id])
     redirect_to feed_path(current_user)  unless user == current_user
+  end
+
+  def comment_notification(action)
+     @notification = current_user.active_notifications.new(
+        post_id: @post.id,
+        comment_id: @comment.id,
+        reciever_id: @post.user_id,
+        action: action
+      )
+  end
+
+  def comment_notification_mailer(post)
+    NotificationMailer.comment_notification_mail(current_user,post.user,post).deliver_now if post.user.email.present? && post.user.notification
   end
   
 
