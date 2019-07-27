@@ -1,6 +1,7 @@
 class NotificationsController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user
+  before_action :correct_user_page, only: [:index,:history,:mail_notificatioin_toggle]
+
   def index
     @notifications = Notification.includes(:sender,:post,:comment).where(reciever_id: current_user.id).recent.page(params[:page]).per(15)
     # @notifications = current_user.passive_notifications.includes(:sender,:post,:comment).where(reciever_id:current_user.id,checked: false).recent.page(params[:page]).per(15)
@@ -22,4 +23,5 @@ class NotificationsController < ApplicationController
       flash.now[:notice] = 'メール通知をONにしました。'
     end
   end
+
 end

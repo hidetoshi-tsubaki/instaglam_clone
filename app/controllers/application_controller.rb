@@ -89,6 +89,13 @@ class ApplicationController < ActionController::Base
   def comment_notification_mailer(post)
     NotificationMailer.comment_notification_mail(current_user,post.user,post).deliver_now if post.user.email.present? && post.user.notification
   end
+
+   def correct_user_page
+      user = User.find(params[:id])
+      unless current_user.id == user.id
+        redirect_to new_user_session_path
+      end
+    end
   
 
 end

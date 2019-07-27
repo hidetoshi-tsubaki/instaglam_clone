@@ -17,12 +17,5 @@ class PagesController < ApplicationController
   def top
   end
 
-  private
-    def correct_user_page
-      user = User.find(params[:id])
-      unless current_user.id == user.id
-        redirect_to new_user_session_path
-      end
-    end
-  
+
 end
