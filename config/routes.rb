@@ -19,9 +19,9 @@ Rails.application.routes.draw do
   get '/post',to: 'posts#new'
   post '/posts',to: 'posts#create'
   get '/post/:id',to: 'posts#show',as: 'show_post'
-  get '/post/:id',to: 'posts#edit'
-  patch '/post',to: 'posts#update',as: 'update_post'
-  delete '/post',to: 'posts#delete'
+  get '/edit_post/:id',to: 'posts#edit',as: 'edit_post'
+  patch '/post/:id',to: 'posts#update',as: 'update_post'
+  delete '/post/:id',to: 'posts#delete',as: 'delete_post'
   post '/posts_search',to: 'posts#search'
 
   get '/bookmark/:id',to: 'bookmarks#add_bookmark',as: 'add_bookmark'
