@@ -47,7 +47,7 @@ p, ul, li{
 .inline{
   display:inline-block;
 }
-.text-right{
+.text_right{
   text-align:right;
 }
 .hidden{
@@ -319,6 +319,7 @@ post_modal
 /*---------------
 show post
 ---------------*/
+
 #show_post{
   width:400px;
   margin:50px auto;
@@ -328,8 +329,8 @@ show post
   box-shadow: 0 5px 10px rgba(0,0,0,.5);
   margin:0 auto 30px;
 }
-#show_post input{
-  display:block;
+.comments_area .comment_btn{
+  display:inline-block;
 }
 #show_post input[type="text"]{
   width:100%;
@@ -341,6 +342,12 @@ show post
   border:solid 1px #ccc;
   margin-top:10px;
 }
+.comment_btn{
+  text-align:right;
+}
+#comment_btn{
+  display:inline_block;
+}
 #show_post input[type="submit"],.comments_area input[type="submit"]{
   color:#fff;
   background-color:#f99F48;
@@ -350,6 +357,7 @@ show post
   margin-top:5px;
   margin-bottom: 5px;
 }
+
 
 /*---------------
 flash

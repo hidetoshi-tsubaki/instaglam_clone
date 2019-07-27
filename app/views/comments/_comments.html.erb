@@ -1,7 +1,12 @@
 <% comments.each do |comment| %>
   <hr>
-  <li class="comment">
+  <li class="comment" id ="comment_#{comment.id}">
     <p><%= link_to "#{comment.user.name}", user_path(comment.user) %><span class="commented_time"><%= time_ago_in_words(comment.created_at) %>前</span></p>
     <p class="comment-area"><%= comment.content %><p>
+    <div class="text_right">
+      <%= link_to delete_comment_path(comment), data: { confirm: 'この投稿を削除しますか?' },method: :delete,class:"delete-btn" do %>
+        <%= icon("fas", "trash-alt") %>
+      <% end %>
+    </div>
   </li>
 <% end %>

@@ -12,7 +12,7 @@
     </li>
   </ul>
 <% else %>
-  <div id="bookmark_<%= @post.id %>" >
+  <div id="bookmark_<%= @post.id %>" class="text_right" >
     <%= render partial: 'bookmarks/bookmark_btn', locals: {post: @post} %>
   </div>
 <% end %>

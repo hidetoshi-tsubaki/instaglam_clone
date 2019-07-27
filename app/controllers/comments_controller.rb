@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user, only: [:edit,:update,:delete]
+  # before_action :correct_user, only: [:edit,:update,:delete]
 
   def create
     @comment = current_user.comments.new(comment_paramater)
@@ -18,13 +18,17 @@ class CommentsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
-  def update
-  end
 
   def delete
+      comment =Comment.find(params[:id])
+      if comment.destroy
+        flash.now[:notice] = 'コメントは削除されました。'
+        redirect_to show_post_path(comment.post_id)
+      else
+        flash.now[:alert] = 'コメントは削除に失敗しました。もう一度お試しください'
+        redirect_to show_post_path(comment.post_id, anchor: 'comment_#{comment.post_id}')
+    end
+  
   end
 
   private
