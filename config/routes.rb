@@ -17,10 +17,10 @@ Rails.application.routes.draw do
   end
 
   get '/post',to: 'posts#new'
-  post '/posts',to: 'posts#create'
+  post '/post',to: 'posts#create'
   get '/post/:id',to: 'posts#show',as: 'show_post'
   get '/post/:id/edit',to: 'posts#edit',as: 'edit_post'
-  patch '/post/:id',to: 'posts#update',as: 'update_post'
+  patch '/post/:id',to: 'posts#update'
   delete '/post/:id/delete',to: 'posts#delete',as: 'delete_post'
   post '/posts_search',to: 'posts#search'
 
