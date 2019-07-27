@@ -1,5 +1,5 @@
 <div class="upload_wrapper">
-<%= form_with model: post ,url: update_post_path(post), builder: CustomFormBuilder, local: true do |f| %>
+<%= form_with model: post ,url: post_path(post), builder: CustomFormBuilder, local: true do |f| %>
   <div class="field img_uploader">
     <div id="prev_img_box" class="hidden">
       <img id="prev_img" src="#" class='hidden' /> 
