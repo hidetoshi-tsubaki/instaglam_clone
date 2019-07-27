@@ -5,7 +5,7 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.new(comment_paramater)
     @post = Post.includes(comments: :user).find(comment_paramater[:post_id])
-    @comments = @post.comments.includes(:user).recent
+    @comments = @post.comments.includes(:user).recent.recent.page(params[:page]).per(15)
     if @comment.save
       send_notification_by(current_user,"comment") unless current_user.id == @post.user_id
       respond_to do |format|
@@ -47,7 +47,7 @@ class CommentsController < ApplicationController
     end
 
     def correct_user
-      @comment = Commnet.find_by(params[:id])
+      @comment = Comment.find(params[:id])
       redirect_to feed_path(current_user) unless current_user.id == @comment.user_id
     end
 end

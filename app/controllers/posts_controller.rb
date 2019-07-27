@@ -18,7 +18,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.includes(:user).find(params[:id])
-    @comments = @post.comments.includes(:user).recent
+    @comments = @post.comments.includes(:user).recent.page(params[:page]).per(15)
     @comment = Comment.new
     respond_to do |format|
       format.html
@@ -52,9 +52,10 @@ class PostsController < ApplicationController
   end
 
   def search
-    @user = User.find_by(params[:page_user_id])
+    @user = User.find(params[:page_user_id])
     @current_user = current_user
-    @posts = Post.search(params[:keyword],params[:current_page],@user.id,@current_user)
+    post_ids = Post.search(params[:keyword],params[:current_page],@user.id,@current_user)
+    @posts = Post.where("id IN (?)",post_ids).recent
     respond_to do |format|
       format.html {redirect_to feed_path(current_user)}
       format.js
@@ -67,7 +68,7 @@ class PostsController < ApplicationController
     end
 
     def correct_user
-      @post = Post.find_by(params[:id])
+      @post = Post.find(params[:id])
       redirect_to feed_path(current_user) unless current_user.id == @post.user_id
     end
     
