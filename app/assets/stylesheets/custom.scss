@@ -47,6 +47,9 @@ p, ul, li{
 .inline{
   display:inline-block;
 }
+.text-right{
+  text-align:right;
+}
 .hidden{
   display:none;
 }
@@ -343,6 +346,10 @@ show post
   background-color:#f99F48;
   border-radius:2px;
 }
+#comments hr{
+  margin-top:5px;
+  margin-bottom: 5px;
+}
 
 /*---------------
 flash
@@ -516,6 +523,9 @@ post
 #post_img{
   margin:30px auto 0;
   font-size:0;
+}
+.present_img{
+  width:300px;
 }
 .img_uploader .title{
   margin-top:20px;
