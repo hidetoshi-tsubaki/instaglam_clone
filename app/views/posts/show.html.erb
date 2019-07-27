@@ -1,6 +1,7 @@
 <%= provide(:title,"詳細ページ") %>
 <div id="show_post">
   <%= image_tag @post.img.to_s, class:"post_img" %>
+  <%= render 'posts/action_btn' %>
   <div class="comment_form">
     <%= render 'comments/comment_form' %>
   </div>

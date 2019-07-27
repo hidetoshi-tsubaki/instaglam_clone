@@ -1,12 +1,12 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user, only: [:edit,:update,:delete]
+  before_action :correct_user, only: [:edit,:delete]
   def new
     @post = Post.new 
   end
 
   def create
-    @post = current_user.posts.new(post_paramater)
+    @post = current_user.posts.new(post_params)
     if @post.save
       flash.now[:notice] = 'post successfully!'
       redirect_to show_post_path(@post)
@@ -27,14 +27,27 @@ class PostsController < ApplicationController
   end
 
   def edit
-
+    @post = Post.find(params[:id])
   end
 
   def update
-
+    post = Post.find(params[:id])
+    if post.update!(post_params)
+      flash.now[:notice] = "投稿画像を編集しました。"
+      redirect_to user_path(current_user)
+    else
+      flash.now[:notice] = "編集内容が正常に保存されませんでした。"
+      render :edit
+    end
   end
 
   def delete
+    if Post.find(params[:id]).destroy
+      flash.now[:notice] = "投稿は削除されました"
+      redirect_to user_path(current_user)
+    else
+      flash.now[:alert] = "投稿の削除に失敗しました"
+    end
 
   end
 
@@ -49,10 +62,14 @@ class PostsController < ApplicationController
   end
 
   private 
-    def post_paramater
-      params.require(:post).permit(:img, :title)
+    def post_params
+      params.require(:post).permit(:img, :title, :img_chahe)
     end
 
+    def correct_user
+      @post = current_user.posts.find_by(id: params[:id])
+      redirect_to feed_path(current_user) if @post.nil?
+    end
     
 
 end

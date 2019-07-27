@@ -76,10 +76,6 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_in) { |u| u.permit(:username, :password, :remember_me) }
   end
 
-  def correct_user
-    user = User.find(params[:id])
-    redirect_to feed_path(current_user)  unless user == current_user
-  end
 
   def comment_notification(action)
      @notification = current_user.active_notifications.new(

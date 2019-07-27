@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   mount_uploader :img, ImgUploader
   belongs_to :user
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :bookmarks, foreign_key: "bookmarked_post_id", dependent: :destroy
   has_many :users, through: :bookmarks
   has_many :notifications, dependent: :destroy
