@@ -10,13 +10,11 @@ class Post < ApplicationRecord
   validates :title ,{presence: true, length: {maximum: 256}}
 
   def self.search(keywords_params,current_page_params,user_id,user)
-    # return posts = Post.all.recent if keywords_params == ""
       return posts = Post.get_all_posts(current_page_params,user_id,user) if keywords_params == ""
     keywords = keywords_params.split(/[[:blank:]]+/)
     posts = []
     keywords.each do |keyword|
       next if keyword == ""
-      # posts += Post.where('title LIKE ? ',"%#{keyword}%")
       posts += Post.get_searched_result(keywords_params,current_page_params,user_id,user)
     end
     # uniq!だと、変更がない場合、nilを返してしまう
@@ -28,7 +26,7 @@ class Post < ApplicationRecord
     when 'all_posts' then
       where('title LIKE ? ',"%#{keyword}%")
     when 'feed' then
-      where("(user_id IN ?) AND (title LIKE ?)",current_user.following_ids,"%#{keyword}%")
+      where("(user_id IN ?) AND (title LIKE ?)",user.following_ids,"%#{keyword}%")
     when 'show'
       where("(user_id = ?) AND (title LIKE ?)", user_id.to_i,"%#{keyword}%")
     end

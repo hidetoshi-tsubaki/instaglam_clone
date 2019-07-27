@@ -10,10 +10,12 @@
       <p>: 名前<span class="required">必須</span></p>
       <%= f.text_field :name %>
     </div>
+
     <div class="field">
       <p>: ユーザー名<span class="required">必須</span></p>
       <%= f.text_field :username %>
     </div>
+
     <div class="field">
       <p>: パスワード
         <% if @minimum_password_length %>(<%= @minimum_password_length %>文字以上)
@@ -21,10 +23,12 @@
       </p>
       <%= f.password_field :password, autocomplete: "new-password" %>
     </div>
+
     <div class="field">
       <p>: パスワード（確認用）<span class="required">必須</span></p>
       <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
     </div>
+    
     <div class="actions">
       <%= f.submit "Sign up", id:"submit_btn" %>
     </div>
