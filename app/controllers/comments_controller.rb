@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :authenticate_user!
-  # before_action :correct_user, only: [:edit,:update,:delete]
+  before_action :correct_user, only: :delete
 
   def create
     @comment = current_user.comments.new(comment_paramater)
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
 
 
   def delete
-      comment =Comment.find(params[:id])
+      comment = Comment.find(params[:id])
       if comment.destroy
         flash.now[:notice] = 'コメントは削除されました。'
         redirect_to show_post_path(comment.post_id)
@@ -44,5 +44,10 @@ class CommentsController < ApplicationController
       else
         redirect_to feed_path(current_user)
       end
+    end
+
+    def correct_user
+      @comment = Commnet.find_by(params[:id])
+      redirect_to feed_path(current_user) unless current_user.id == @comment.user_id
     end
 end
