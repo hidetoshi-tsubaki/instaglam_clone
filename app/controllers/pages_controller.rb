@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   before_action :authenticate_user! ,only: [:feed,:all_posts]
-  before_action :correct_user, only: [:feed, :all_posts]
+  before_action :correct_user_page, only: [:feed, :all_posts]
   def feed
     @user = User.find(params[:id])
     @comment = Comment.new
@@ -16,5 +16,13 @@ class PagesController < ApplicationController
 
   def top
   end
+
+  private
+    def correct_user_page
+      user = User.find(params[:id])
+      unless current_user.id == user.id
+        redirect_to new_user_session_path
+      end
+    end
   
 end

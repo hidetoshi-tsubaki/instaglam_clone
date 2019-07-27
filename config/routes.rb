@@ -19,18 +19,19 @@ Rails.application.routes.draw do
   get '/post',to: 'posts#new'
   post '/posts',to: 'posts#create'
   get '/post/:id',to: 'posts#show',as: 'show_post'
-  get '/edit_post/:id',to: 'posts#edit',as: 'edit_post'
+  get '/post/:id/edit',to: 'posts#edit',as: 'edit_post'
   patch '/post/:id',to: 'posts#update',as: 'update_post'
-  delete '/post/:id',to: 'posts#delete',as: 'delete_post'
+  delete '/post/:id/delete',to: 'posts#delete',as: 'delete_post'
   post '/posts_search',to: 'posts#search'
 
   get '/bookmark/:id',to: 'bookmarks#add_bookmark',as: 'add_bookmark'
-  get '/remove_bookmark/:id',to: 'bookmarks#remove_bookmark',as: 'remove_bookmark'
+  get '/bookmark/:id/remove',to: 'bookmarks#remove_bookmark',as: 'remove_bookmark'
   
   get '/follow/:id',to: 'relationships#follow',as:'follow'
   get '/unfollow/:id',to: 'relationships#unfollow',as: 'unfollow'
   
   post '/comments',to:'comments#create'
+  delete '/comemet/:id/delete',to:'comments#delete',as: 'delete_comment'
 
   get '/notifications/:id',to:'notifications#index',as: 'notifications'
   get '/notifications_history/:id',to:'notifications#history',as: 'notifications_history'  

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
-  before_action :correct_user, only: [:edit,:delete]
+  before_action :correct_user, only: [:edit,:update,:delete]
   def new
     @post = Post.new 
   end
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
       flash.now[:notice] = "投稿画像を編集しました。"
       redirect_to user_path(current_user)
     else
-      flash.now[:notice] = "編集内容が正常に保存されませんでした。"
+      flash.now[:alert] = "編集内容が正常に保存されませんでした。"
       render :edit
     end
   end
@@ -67,8 +67,8 @@ class PostsController < ApplicationController
     end
 
     def correct_user
-      @post = current_user.posts.find_by(id: params[:id])
-      redirect_to feed_path(current_user) if @post.nil?
+      @post = Post.find_by(params[:id])
+      redirect_to feed_path(current_user) unless current_user.id == @post.user_id
     end
     
 
