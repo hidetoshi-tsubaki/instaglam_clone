@@ -1,0 +1,8 @@
+<%= form_with url: posts_search_path ,id:'formSearch' do |f| %>
+  <%= f.text_field :keyword ,id:"keyword_input" %>
+  <%= f.hidden_field :current_page ,:value => action_name %>
+  <% if @user %>
+    <%= f.hidden_field :page_user_id ,:value => @user.id %>
+  <% end %>
+  <%= f.submit '検索' ,id:"search_btn" %>
+<% end %>
