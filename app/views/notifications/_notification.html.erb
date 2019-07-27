@@ -1,0 +1,6 @@
+<li class ="notification">
+  <p class="notification_detail"><%== notificatioin_detail(notification) %><span><%= "(#{time_ago_in_words(notification.created_at)}前)" %></span></p>
+  <% unless notification.comment.nil? %>
+    <p class="notification_comment"><%= notification.comment.content %></p>
+  <% end %>
+</li>

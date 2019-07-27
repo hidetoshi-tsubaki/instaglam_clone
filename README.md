@@ -1,24 +1,45 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ー相談したい点ー
+・通知機能
+  通知一覧ページで未読だけ表示して、一覧ページを見た後に、全て既読にする処理がうまくかけませんでした。
+  notifications#indexでchecked=falseだけを取得、まではいいのですが、
+  その後どのタイミングで既読処理を書けばいいのかわかりませんでした。
+  notifications#indexで既読処理を書いてしまうと、viewに行く前に全て既読になってしまい、
+  未読を表示できません。
 
-Things you may want to cover:
 
-* Ruby version
+・メール通知機能
+  コメントなどをした後にメールが送信される機能を実装したのですが、
+ メールが送られる処理に時間がかかり、動作がとても遅くなりました。
+ threadsを使って、並列処理を書いたのですが、他に良い方法はあるのでしょうか？
+ 
+ 
+・検索機能
+検索機能に関して3つ問題が出て、解決できませんでした。
+①ページによって異なる検索処理をどう書けばいいのかわかりません。
+ 分岐に関しては、
+1.top(feed)ページ、フォローしている人の画像からの検索
+2.個別ページ、自分の投稿画像からの検索
+3.全ての画像表示ページ、全ての画像からの検索
+があると思います。
+controllerで現在のページを取得し、分岐させるのが、ベストなのでしょうか？
 
-* System dependencies
+②top(feed)ページで検索するとエラーが出てしまいます。
+SQLite3::SQLException - near "1": syntax error:
+というエラーが出て、検索ができず、解決策がわかりませんでした。
 
-* Configuration
+③私が実装した複数検索だと順番を変える処理で二度sqlを走らせることになる。
+①postのidを取得し、②idを使って順番を変えたpostを取得する
+一回でpostを取得できる方法がわかりませんでした。
 
-* Database creation
+・要素内のスクロール読み込み
+  コメント欄のコメントをkaminariとjscrollを使って、スクロール読み込みにしたかったのですが、
+  うまく、scrollHeightとclientHeightを取得できず、実装ができませんでした。
+  
+  
+・通知機能・メール通知機能
+  もっとリファクタリングして、綺麗なコードになると思うのですが、ご指摘いただけると幸いです。
+  
+・テスト
+ テストを書くまでに至りませんでしたが、後日テストコードを書いてレビューしていただけますでしょうか？
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

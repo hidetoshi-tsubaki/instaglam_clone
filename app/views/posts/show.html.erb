@@ -1,0 +1,11 @@
+<%= provide(:title,"詳細ページ") %>
+<div id="show_post">
+  <%= image_tag @post.img.to_s, class:"post_img" %>
+  <%= render 'posts/action_btn' %>
+  <div class="comment_form">
+    <%= render 'comments/comment_form' %>
+  </div>
+  <ul id="comments" class="comment_jscroll scroll_list">
+    <%= render partial: 'comments/comments', locals: {comments: @comments} %>
+  </ul>
+</div>

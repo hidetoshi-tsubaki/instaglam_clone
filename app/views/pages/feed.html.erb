@@ -1,0 +1,12 @@
+<%= provide(:title,"Faketagram") %>
+<% if @posts.count == 0 %>
+  <div class="no_following">
+    <p>友達をフォローして、写真を共有してもらおう！</p>
+    <%= link_to 'みんなの写真を見てみる', all_posts_path(@user) %>
+  </div>
+<% end %>
+<div id ="posts_index" class="scroll_list jscroll">
+  <%= render partial: 'posts/posts_index', locals: {posts: @posts}%>
+  <%= paginate @posts %>
+</div>
+

@@ -1,0 +1,25 @@
+<div id ="logo" >
+  <%= link_to 'Faketagram', feed_path(current_user) %>
+</div>
+<ul id="header_menu">
+  <li class="pc">
+    <%= render 'layouts/search' %>
+  </li>
+  <li id="upload_link", class="link pc">
+    <%= link_to 'Upload',post_path %>
+  </li>
+  <li id ="push" class="link pc">
+    <%= link_to '通知', notifications_path(current_user) %>
+    <% if unchecked_notifications %>
+      <%= icon("fas", "bell") %>
+    <% end %>
+  </li>
+  <li class="user_menu_btn link pc">
+    <%= icon("fas", "user open_user_menu") %>
+  </li>
+  <div class="user_menu_btn sp-menu sp">
+    <%= icon("fas", "bars open_user_menu") %>
+  </div>
+</ul>
+
+

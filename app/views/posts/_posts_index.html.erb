@@ -1,0 +1,5 @@
+<% posts.each do |post| %>
+  <div class="post">
+    <%= render partial: 'posts/post' ,locals: {post: post} %>
+  </div>
+<% end %>

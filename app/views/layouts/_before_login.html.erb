@@ -1,0 +1,11 @@
+<div id = "logo">
+  <%= link_to 'Faketagram' ,"/" %>
+</div>
+<ul id="before_header_menu">
+  <li class="login">
+    <%= link_to 'ログイン', new_user_session_path %>
+  </li>
+  <%= link_to new_user_registration_path do %>
+    <li class="register">登録</li>
+  <% end %>
+<ul>

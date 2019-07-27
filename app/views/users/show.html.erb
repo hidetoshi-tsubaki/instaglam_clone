@@ -1,0 +1,39 @@
+<%= provide(:title,"#{@user.name}さんのプロフィール") %>
+<div id="profile_wrapper">
+  <div id="profile">
+    <% if current_user.id == @user.id %>
+      <%= link_to '編集', edit_user_registration_path(@user), class:"edit_profile" %>
+    <% else %>
+      <div id="follow_btn" >
+        <%= render 'relationships/follow_btn' %>
+      </div>
+    <% end %>
+    <% if @user.img? %>
+      <%= image_tag @user.img.to_s, class:'profile_img' %>
+    <% else %>
+      <img class="profile_img" src="https://kukuhana.s3-ap-northeast-1.amazonaws.com/no_img.jpg" />
+    <% end %>
+    <p id="name"><%= @user.username %></p>
+    <div id="profile_counts">
+      <p class="action_count">投稿画像数<br><%= @user.posts.count %></p>
+      <P class="action_count">フォロワー<br><%= @user.followers.count %></p>
+      <p class="action_count">フォロー<br><%= @user.followings.count %></p>
+      <p class="action_count">お気に入り<br><%= @user.bookmarks.count %></p>
+    </div>
+    <p id="introduction"><%= @user.introduction %></p>
+    <hr>
+    <p class="website"><%= link_to "#{@user.name}さんのウェブサイトはこちら", "#{@user.website}" %></p>
+  </div>
+  <div id ="follower_list">
+    <p>フォローリスト</p>
+    <ul>
+     <%= render 'users/follow_list' %>
+    </ul>
+  </div>
+</div>
+<div class="user_posts_index">
+  <div id ="posts_index" class="scroll_list jscroll">
+    <%= render partial: 'posts/posts_index', locals: {posts: @posts} %>
+    <%= paginate @posts %>
+  </div>
+</div>

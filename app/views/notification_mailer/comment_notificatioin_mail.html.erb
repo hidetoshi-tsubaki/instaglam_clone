@@ -1,0 +1,5 @@
+<h1>Faketagram</h1>
+<p>こんにちわ、<%= @reciever.name %>さん</p>
+<p><%= @sender.name %>さんがあなたの投稿にコメントしました。</p>
+<p><%= link_to 'こちら' show_post_url(@post.id) %>をクリックして、今すぐ確認しましょう！</p>
+<p><%= link_to 'Faketagram' root_url %></p>

@@ -1,0 +1,18 @@
+<% if current_user.id == @post.user_id %>
+  <ul class="text-right">
+    <li class="inline">
+      <%= link_to edit_post_path(@post),class:"edit-btn" do %>
+        <%= icon("fas", "edit") %>
+      <% end %>
+    </li>
+    <li class="inline">
+    <%= link_to delete_post_path(@post), data: { confirm: 'この投稿を削除しますか?' },method: :delete,class:"delete-btn" do %>
+        <%= icon("fas", "trash-alt") %>
+      <% end %>
+    </li>
+  </ul>
+<% else %>
+  <div id="bookmark_<%= @post.id %>" class="text_right" >
+    <%= render partial: 'bookmarks/bookmark_btn', locals: {post: @post} %>
+  </div>
+<% end %>

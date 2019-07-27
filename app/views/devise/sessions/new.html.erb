@@ -1,0 +1,31 @@
+<%= provide(:title,"ログイン画面") %>
+<h1 class="page_title"><%= yield(:title) %></h1>
+<div class="sign_form"%>
+  <%= link_to "/users/auth/facebook" do %>
+    <p class="facebook_btn"><%= icon("fab", "facebook-square") %> Facebookでログイン</p>
+  <% end %>
+  <hr>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name), builder: CustomFormBuilder) do |f| %>
+    <div class="field">
+      <p>: ユーザー名</p>
+      <%= f.text_field :username, autofocus: true, autocomplete: "username" %>
+    </div>
+
+    <div class="field">
+      <p>: パスワード</p>
+      <%= f.password_field :password, autocomplete: "current-password" %>
+    </div>
+
+    <% if devise_mapping.rememberable? %>
+      <div class="field">
+        <p>: Remember me</p>
+        <%= f.check_box :remember_me %>
+      </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit "Log in", id:"submit_btn" %>
+    </div>
+  <% end %>
+  <p class="signUp_btn"><%= link_to '登録', new_user_registration_path %></p>
+</div>

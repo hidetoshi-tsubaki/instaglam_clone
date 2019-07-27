@@ -1,0 +1,11 @@
+faketagram
+
+こんにちわ、<%= @reciever.name %>さん
+
+<%= @sender.name %>さんがあなたの投稿にコメントしました。
+
+以下のURLをクリックして、今すぐ確認しましょう
+<%= show_post_url(@post.id) %>
+
+Faketagram
+<%= root_url %>

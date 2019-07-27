@@ -1,0 +1,84 @@
+<%= provide(:title,"登録内容変更") %>
+<h1 class="page_title"><%= yield(:title) %></h1>
+<div class="sign_form"%>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, builder: CustomFormBuilder) do |f| %>
+    <div id="prev_user_img_box" class="hidden">
+      <img id="prev_user_img" src="#" class='hidden' /> 
+    </div>
+    <div id="present_img_box">
+      <% if current_user.img? %>
+        <%= image_tag current_user.img.to_s, class:'user_img' %>
+      <% else %>
+        <%= f.hidden_field :img_cache %>
+        <img class="present_img" src="https://kukuhana.s3-ap-northeast-1.amazonaws.com/no_img.jpg" />
+      <% end %> 
+      <%= f.file_field :img, id: 'user_img' %>
+    </div>
+
+    <div class="field">
+      <p>: 名前</p>
+      <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    </div>
+
+    <div class="field">
+      <p>: ユーザー名</p>
+      <%= f.text_field :username, autocomplete: "username" %>
+    </div>
+
+    <div class="field">
+      <p>
+        : パスワード
+        <% if @minimum_password_length %>(<%= @minimum_password_length %>文字以上)
+        <% end %> （変更する場合のみ）
+      </p>
+      <%= f.password_field :password, autocomplete: "new-password" %>
+    </div>
+
+    <div class="field">
+      <p>: パスワード（確認用）</p>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    </div>
+
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="field">
+      <p>: 現在のパスワード （パスワード変更の際は必須）
+      <%= f.password_field :current_password, autocomplete: "current-password" %>
+    </div>
+
+    <div class="field">
+      <p>: ウェブサイト</p>
+      <%= f.text_field :website, autocomplete: "website" %>
+    </div>
+
+    <div class="field">
+      <p>: 自己紹介文</p>
+      <%= f.text_area :introduction, autocomplete: "introduction" %>
+    </div>
+
+    <hr>
+    <p>非公開情報</p>
+
+    <div class="field">
+      <p>: メールアドレス</p>
+      <%= f.email_field :email, autocomplete: "email" %>
+    </div>
+
+    <div class="field">
+      <p>: 電話番号  例）09012345678  ハイフンなし</p>
+      <%= f.telephone_field :tel, autocomplete: "tel" %>
+    </div>
+
+    <div class="field">
+      <p>: 性別</p>
+      <%= f.select :sex, [["男性","male"],["女性","female"]], :prompt => "性別" %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "更新", id:"submit_btn" %>
+    </div>
+  <% end %>
+</div>
+<p class="cancel"><%= link_to "退会はこちらから", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>

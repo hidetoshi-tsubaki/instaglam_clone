@@ -1,0 +1,12 @@
+<% if current_page?(action: 'index') %>
+  <%= provide(:title,"通知一覧") %>
+<% else %>
+  <%= provide(:title,"通知履歴") %>
+<% end %>
+<div>
+  <p id="notification_title"><%= yield(:title) %></p>
+  <ul class="notifications_index scroll_list jscroll">
+    <%= render @notifications %>
+    <%= paginate @notifications %>
+  </ul>
+</div>
